@@ -72,7 +72,7 @@ namespace Cyan {
                     desc.graphicsFormat = settings.graphicsFormat;
                     if (settings.disableMSAA)
                     {
-                        desc.msaaSamples = 0;
+                        desc.msaaSamples = 1;
                     }
                     RenderingUtils.ReAllocateIfNeeded(ref dstTextureId, Vector2.one, desc, name: settings.dstTextureId);
                     destination = dstTextureId;
