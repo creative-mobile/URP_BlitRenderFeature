@@ -78,7 +78,7 @@ namespace Cyan {
                     destination = dstTextureId;
                     if (settings.dstTextureId != oldTextureId)
                     {
-                        blitTexId = Shader.PropertyToID(oldTextureId = settings.dstTextureId)
+                        blitTexId = Shader.PropertyToID(oldTextureId = settings.dstTextureId);
                     }
                     Shader.SetGlobalTexture(blitTexId, dstTextureId);
                 } else if (settings.dstType == Target.RenderTextureObject) {
