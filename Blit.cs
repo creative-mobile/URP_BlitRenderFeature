@@ -15,7 +15,7 @@ namespace Cyan {
             private RTHandle source;
             private RTHandle destination;
             private RTHandle temp;
-            private int blitTexId
+            private int blitTexId;
             private string oldTextureId;
 
             //private RTHandle srcTextureId;
