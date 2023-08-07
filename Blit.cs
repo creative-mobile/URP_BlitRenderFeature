@@ -15,6 +15,8 @@ namespace Cyan {
             private RTHandle source;
             private RTHandle destination;
             private RTHandle temp;
+            private int blitTexId
+            private string oldTextureId;
 
             //private RTHandle srcTextureId;
             private RTHandle srcTextureObject;
@@ -68,8 +70,17 @@ namespace Cyan {
                     destination = renderer.cameraColorTargetHandle;
                 } else if (settings.dstType == Target.TextureID) {
                     desc.graphicsFormat = settings.graphicsFormat;
+                    if (settings.disableMSAA)
+                    {
+                        desc.msaaSamples = 0;
+                    }
                     RenderingUtils.ReAllocateIfNeeded(ref dstTextureId, Vector2.one, desc, name: settings.dstTextureId);
                     destination = dstTextureId;
+                    if (settings.dstTextureId != oldTextureId)
+                    {
+                        blitTexId = Shader.PropertyToID(oldTextureId = settings.dstTextureId)
+                    }
+                    Shader.SetGlobalTexture(blitTexId, dstTextureId);
                 } else if (settings.dstType == Target.RenderTextureObject) {
                     destination = dstTextureObject;
                 }
@@ -125,6 +136,8 @@ namespace Cyan {
 
             public bool overrideGraphicsFormat = false;
             public UnityEngine.Experimental.Rendering.GraphicsFormat graphicsFormat;
+
+            public bool disableMSAA = false;
         }
 
         public enum Target {
