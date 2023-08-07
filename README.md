@@ -12,7 +12,7 @@
 
 ### Setup:
 - Install via Package Manager → Add package via git URL : 
-  - `https://github.com/Cyanilux/URP_BlitRenderFeature.git#2022.1`
+  - `https://github.com/creative-mobile/URP_BlitRenderFeature.git#LIB/2022.3`
 - Alternatively, download and put the folder in your Assets
 
 ### Usage :
