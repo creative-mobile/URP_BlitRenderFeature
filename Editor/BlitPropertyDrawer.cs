@@ -72,7 +72,6 @@ namespace Cyan {
 				}
 				EditorGUILayout.EndHorizontal();
 				EditorGUILayout.PropertyField(property.FindPropertyRelative("disableMSAA"));
-				EditorGUILayout.PropertyField(property.FindPropertyRelative("size"));
 			} else if (enumValue == (int)Blit.Target.RenderTextureObject) {
 				EditorGUILayout.PropertyField(property.FindPropertyRelative("dstTextureObject"));
 			}

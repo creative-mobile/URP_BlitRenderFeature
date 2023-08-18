@@ -98,10 +98,6 @@ namespace Cyan {
                 
                 //Debug.Log("blit : src = " + source.name + ", dst = " + destination.name);
                 if (source == destination){
-                    //RenderingUtils.ReAllocateIfNeeded(ref temp, Vector2.one, desc, name: "_TemporaryColorTexture");
-                    // These resizable RTHandles seem quite glitchy when switching between game and scene view :\
-                    // instead,
-                    RenderingUtils.ReAllocateIfNeeded(ref temp, desc, name: "_TemporaryColorTexture");
                     Blitter.BlitCameraTexture(cmd, source, temp, settings.blitMaterial, settings.blitMaterialPassIndex);
                     Blitter.BlitCameraTexture(cmd, temp, destination, Vector2.one);
                 }else{
