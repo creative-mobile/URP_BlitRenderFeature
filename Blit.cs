@@ -74,6 +74,9 @@ namespace Cyan {
                     {
                         desc.msaaSamples = 1;
                     }
+
+                    desc.height = settings.size.y;
+                    desc.width = settings.size.x;
                     RenderingUtils.ReAllocateIfNeeded(ref dstTextureId, Vector2.one, desc, name: settings.dstTextureId);
                     destination = dstTextureId;
                     if (settings.dstTextureId != oldTextureId)
@@ -138,6 +141,8 @@ namespace Cyan {
             public UnityEngine.Experimental.Rendering.GraphicsFormat graphicsFormat;
 
             public bool disableMSAA = false;
+
+            public Vector2Int size;
         }
 
         public enum Target {
