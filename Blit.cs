@@ -44,10 +44,7 @@ namespace Cyan {
                 var desc = renderingData.cameraData.cameraTargetDescriptor;
                 desc.depthBufferBits = 0; // Color and depth cannot be combined in RTHandles
 
-                //RenderingUtils.ReAllocateIfNeeded(ref temp, Vector2.one, desc, name: "_TemporaryColorTexture");
-                // These resizable RTHandles seem quite glitchy when switching between game and scene view :\
-                // instead,
-                RenderingUtils.ReAllocateIfNeeded(ref temp, desc, name: "_TemporaryColorTexture");
+                
 
                 var renderer = renderingData.cameraData.renderer;
                 if (settings.srcType == Target.CameraColor) {
@@ -61,6 +58,10 @@ namespace Cyan {
                     Previously we could use a RenderTargetIdentifier... but the Blitter class doesn't have support for those in 2022.1 -_-
                     Instead, I guess we'll have to rely on the shader sampling the global textureID
                     */
+                    //RenderingUtils.ReAllocateIfNeeded(ref temp, Vector2.one, desc, name: "_TemporaryColorTexture");
+                    // These resizable RTHandles seem quite glitchy when switching between game and scene view :\
+                    // instead,
+                    RenderingUtils.ReAllocateIfNeeded(ref temp, desc, name: "_TemporaryColorTexture");
                     source = temp;
                 } else if (settings.srcType == Target.RenderTextureObject) {
                     source = srcTextureObject;
@@ -75,9 +76,7 @@ namespace Cyan {
                         desc.msaaSamples = 1;
                     }
 
-                    desc.height = settings.size.y;
-                    desc.width = settings.size.x;
-                    RenderingUtils.ReAllocateIfNeeded(ref dstTextureId, Vector2.one, desc, name: settings.dstTextureId);
+                    RenderingUtils.ReAllocateIfNeeded(ref dstTextureId, desc, wrapMode: TextureWrapMode.Clamp, name: settings.dstTextureId);
                     destination = dstTextureId;
                     if (settings.dstTextureId != oldTextureId)
                     {
@@ -99,6 +98,10 @@ namespace Cyan {
                 
                 //Debug.Log("blit : src = " + source.name + ", dst = " + destination.name);
                 if (source == destination){
+                    //RenderingUtils.ReAllocateIfNeeded(ref temp, Vector2.one, desc, name: "_TemporaryColorTexture");
+                    // These resizable RTHandles seem quite glitchy when switching between game and scene view :\
+                    // instead,
+                    RenderingUtils.ReAllocateIfNeeded(ref temp, desc, name: "_TemporaryColorTexture");
                     Blitter.BlitCameraTexture(cmd, source, temp, settings.blitMaterial, settings.blitMaterialPassIndex);
                     Blitter.BlitCameraTexture(cmd, temp, destination, Vector2.one);
                 }else{
@@ -141,8 +144,6 @@ namespace Cyan {
             public UnityEngine.Experimental.Rendering.GraphicsFormat graphicsFormat;
 
             public bool disableMSAA = false;
-
-            public Vector2Int size;
         }
 
         public enum Target {
